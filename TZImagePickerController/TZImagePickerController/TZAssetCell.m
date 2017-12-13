@@ -231,11 +231,14 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     if (self.allowPreview) {
-        _selectPhotoButton.frame = CGRectMake(self.tz_width - 44, 0, 44, 44);
+//        _selectPhotoButton.frame = CGRectMake(self.tz_width - 44, 0, 44, 44);
+        _selectPhotoButton.frame = CGRectMake(0, self.tz_height - 44, self.tz_width/2, 44);
+        
     } else {
         _selectPhotoButton.frame = self.bounds;
     }
-    _selectImageView.frame = CGRectMake(self.tz_width - 27, 0, 27, 27);
+//    _selectImageView.frame = CGRectMake(self.tz_width - 27, 0, 27, 27);
+    _selectImageView.frame = CGRectMake(20, self.tz_height - 8 - 17, 17, 17);
     _imageView.frame = CGRectMake(0, 0, self.tz_width, self.tz_height);
     
     static CGFloat progressWH = 20;
@@ -356,7 +359,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    _imageView.frame = self.bounds;
+//    _imageView.frame = self.bounds;
 }
 
 @end

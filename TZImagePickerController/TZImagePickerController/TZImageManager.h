@@ -38,6 +38,10 @@
 /// 对照片排序，按修改时间升序，默认是YES。如果设置为NO,最新的照片会显示在最前面，内部的拍照按钮会排在第一个
 @property (nonatomic, assign) BOOL sortAscendingByModificationDate;
 
+@property (nonatomic, assign) BOOL allowPickingImage;
+@property (nonatomic, assign) BOOL allowPickingVideo;
+
+
 /// Minimum selectable photo width, Default is 0
 /// 最小可选中的图片宽度，默认是0，小于这个宽度的图片不可选中
 @property (nonatomic, assign) NSInteger minPhotoWidthSelectable;
@@ -47,7 +51,7 @@
 /// Return YES if Authorized 返回YES如果得到了授权
 - (BOOL)authorizationStatusAuthorized;
 + (NSInteger)authorizationStatus;
-- (void)requestAuthorizationWithCompletion:(void (^)())completion;
+- (void)requestAuthorizationWithCompletion:(void (^)(void))completion;
 
 /// Get Album 获得相册/相册数组
 - (void)getCameraRollAlbum:(BOOL)allowPickingVideo allowPickingImage:(BOOL)allowPickingImage completion:(void (^)(TZAlbumModel *model))completion;

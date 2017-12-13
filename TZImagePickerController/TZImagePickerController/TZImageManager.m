@@ -94,7 +94,7 @@ static dispatch_once_t onceToken;
     return NO;
 }
 
-- (void)requestAuthorizationWithCompletion:(void (^)())completion {
+- (void)requestAuthorizationWithCompletion:(void (^)(void))completion {
     void (^callCompletionBlock)() = ^(){
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion) {
@@ -122,6 +122,9 @@ static dispatch_once_t onceToken;
 
 /// Get Album 获得相册/相册数组
 - (void)getCameraRollAlbum:(BOOL)allowPickingVideo allowPickingImage:(BOOL)allowPickingImage completion:(void (^)(TZAlbumModel *))completion{
+    self.allowPickingVideo = allowPickingVideo;
+    self.allowPickingImage = allowPickingImage;
+    
     __block TZAlbumModel *model;
     if (iOS8Later) {
         PHFetchOptions *option = [[PHFetchOptions alloc] init];
@@ -157,6 +160,9 @@ static dispatch_once_t onceToken;
 }
 
 - (void)getAllAlbums:(BOOL)allowPickingVideo allowPickingImage:(BOOL)allowPickingImage completion:(void (^)(NSArray<TZAlbumModel *> *))completion{
+    self.allowPickingVideo = allowPickingVideo;
+    self.allowPickingImage = allowPickingImage;
+    
     NSMutableArray *albumArr = [NSMutableArray array];
     if (iOS8Later) {
         PHFetchOptions *option = [[PHFetchOptions alloc] init];
@@ -230,6 +236,9 @@ static dispatch_once_t onceToken;
 
 /// Get Assets 获得照片数组
 - (void)getAssetsFromFetchResult:(id)result allowPickingVideo:(BOOL)allowPickingVideo allowPickingImage:(BOOL)allowPickingImage completion:(void (^)(NSArray<TZAssetModel *> *))completion {
+    self.allowPickingVideo = allowPickingVideo;
+    self.allowPickingImage = allowPickingImage;
+    
     NSMutableArray *photoArr = [NSMutableArray array];
     if ([result isKindOfClass:[PHFetchResult class]]) {
         PHFetchResult *fetchResult = (PHFetchResult *)result;
@@ -273,6 +282,9 @@ static dispatch_once_t onceToken;
 ///  Get asset at index 获得下标为index的单个照片
 ///  if index beyond bounds, return nil in callback 如果索引越界, 在回调中返回 nil
 - (void)getAssetFromFetchResult:(id)result atIndex:(NSInteger)index allowPickingVideo:(BOOL)allowPickingVideo allowPickingImage:(BOOL)allowPickingImage completion:(void (^)(TZAssetModel *))completion {
+    self.allowPickingVideo = allowPickingVideo;
+    self.allowPickingImage = allowPickingImage;
+    
     if ([result isKindOfClass:[PHFetchResult class]]) {
         PHFetchResult *fetchResult = (PHFetchResult *)result;
         PHAsset *asset;

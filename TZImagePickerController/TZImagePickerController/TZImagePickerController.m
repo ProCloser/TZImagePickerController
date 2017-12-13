@@ -482,6 +482,7 @@
 
 - (void)setAllowPickingImage:(BOOL)allowPickingImage {
     _allowPickingImage = allowPickingImage;
+    [TZImageManager manager].allowPickingImage = allowPickingImage;
     NSString *allowPickingImageStr = _allowPickingImage ? @"1" : @"0";
     [[NSUserDefaults standardUserDefaults] setObject:allowPickingImageStr forKey:@"tz_allowPickingImage"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -489,6 +490,7 @@
 
 - (void)setAllowPickingVideo:(BOOL)allowPickingVideo {
     _allowPickingVideo = allowPickingVideo;
+    [TZImageManager manager].allowPickingVideo = allowPickingVideo;
     NSString *allowPickingVideoStr = _allowPickingVideo ? @"1" : @"0";
     [[NSUserDefaults standardUserDefaults] setObject:allowPickingVideoStr forKey:@"tz_allowPickingVideo"];
     [[NSUserDefaults standardUserDefaults] synchronize];
