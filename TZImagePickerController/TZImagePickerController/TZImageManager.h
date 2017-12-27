@@ -80,6 +80,9 @@
 - (void)savePhotoWithImage:(UIImage *)image completion:(void (^)(NSError *error))completion;
 - (void)savePhotoWithImage:(UIImage *)image location:(CLLocation *)location completion:(void (^)(NSError *error))completion;
 
+/// save video
+- (void)saveVideoWith:(NSURL *)filePath completio:(void (^)(NSError *error))completion;
+
 /// Get video 获得视频
 - (void)getVideoWithAsset:(id)asset completion:(void (^)(AVPlayerItem * playerItem, NSDictionary * info))completion;
 - (void)getVideoWithAsset:(id)asset progressHandler:(void (^)(double progress, NSError *error, BOOL *stop, NSDictionary *info))progressHandler completion:(void (^)(AVPlayerItem *, NSDictionary *))completion;
