@@ -231,6 +231,7 @@
 - (void)setAllowCrop:(BOOL)allowCrop {
     _allowCrop = allowCrop;
     _scrollView.maximumZoomScale = allowCrop ? 4.0 : 2.5;
+    _scrollView.minimumZoomScale = allowCrop ? 0.2 : 1;
     
     if ([self.asset isKindOfClass:[PHAsset class]]) {
         PHAsset *phAsset = (PHAsset *)self.asset;
@@ -248,7 +249,7 @@
         // 1.让contentSize增大(裁剪框右下角的图片部分)
         CGFloat contentWidthAdd = self.scrollView.tz_width - CGRectGetMaxX(_cropRect);
         CGFloat contentHeightAdd = (MIN(_imageContainerView.tz_height, self.tz_height) - self.cropRect.size.height) / 2;
-        CGFloat newSizeW = self.scrollView.contentSize.width + contentWidthAdd;
+        CGFloat newSizeW = MAX(self.scrollView.contentSize.width, self.tz_width) + contentWidthAdd;
         CGFloat newSizeH = MAX(self.scrollView.contentSize.height, self.tz_height) + contentHeightAdd;
         _scrollView.contentSize = CGSizeMake(newSizeW, newSizeH);
         _scrollView.alwaysBounceVertical = YES;
