@@ -202,7 +202,12 @@ static dispatch_once_t onceToken;
                 }
             }
         }
-        if (completion && albumArr.count > 0) completion(albumArr);
+        // always call completion block.
+        if (completion
+//            && albumArr.count > 0
+            )
+        completion(albumArr);
+        
     } else {
         [self.assetLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if (group == nil) {
