@@ -643,7 +643,14 @@ static dispatch_once_t onceToken;
 #pragma mark - Save photo
 
 - (void)savePhotoWithImage:(UIImage *)image completion:(void (^)(NSError *error))completion {
-    [self savePhotoWithImage:image location:nil completion:completion];
+    [self requestAuthorizationWithCompletion:^{
+        if (![[TZImageManager manager] authorizationStatusAuthorized]){
+            NSError *error = [NSError errorWithDomain:@"sysauth" code:-1 userInfo:nil];
+            completion(error);
+        }else{
+            [self savePhotoWithImage:image location:nil completion:completion];
+        }
+    }];
 }
 
 - (void)savePhotoWithImage:(UIImage *)image location:(CLLocation *)location completion:(void (^)(NSError *error))completion {
