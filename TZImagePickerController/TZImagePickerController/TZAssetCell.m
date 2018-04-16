@@ -16,6 +16,7 @@
 @interface TZAssetCell ()
 @property (weak, nonatomic) UIImageView *imageView;       // The photo / 照片
 @property (weak, nonatomic) UIImageView *selectImageView;
+@property (weak, nonatomic) UIView *disabledCover;
 @property (weak, nonatomic) UIView *bottomView;
 @property (weak, nonatomic) UILabel *timeLength;
 
@@ -69,6 +70,8 @@
     if (model.isSelected) {
         [self fetchBigImage];
     }
+    self.disabledCover.hidden = YES;
+
     [self setNeedsLayout];
 }
 
@@ -80,6 +83,8 @@
 //    if (!self.selectImageView.hidden) {
         self.selectImageView.hidden = !showSelectBtn;
 //    }
+    
+    self.disabledCover.hidden = showSelectBtn;
 }
 
 - (void)setType:(TZAssetCellType)type {
@@ -161,6 +166,16 @@
         _selectPhotoButton = selectPhotoButton;
     }
     return _selectPhotoButton;
+}
+
+- (UIView *)disabledCover{
+    if(!_disabledCover){
+        UIView *cover = [UIView new];
+        cover.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
+        [self.contentView addSubview:cover];
+        _disabledCover = cover;
+    }
+    return _disabledCover;
 }
 
 - (UIImageView *)imageView {
@@ -248,9 +263,13 @@
     _bottomView.frame = CGRectMake(0, self.tz_height - 17, self.tz_width, 17);
     _videoImgView.frame = CGRectMake(8, 0, 17, 17);
     _timeLength.frame = CGRectMake(self.videoImgView.tz_right, 0, self.tz_width - self.videoImgView.tz_right - 5, 17);
-    
+
+    _disabledCover.frame = self.bounds;
+
     self.type = (NSInteger)self.model.type;
     self.showSelectBtn = self.showSelectBtn;
+    
+    
 }
 
 @end
