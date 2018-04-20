@@ -360,7 +360,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             _player = [AVPlayer playerWithPlayerItem:playerItem];
             _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
-            _playerLayer.backgroundColor = [UIColor blackColor].CGColor;
+            _playerLayer.backgroundColor = [UIColor whiteColor].CGColor;
             _playerLayer.frame = self.bounds;
             [self.layer addSublayer:_playerLayer];
             [self configPlayButton];
@@ -388,7 +388,7 @@
         if (currentTime.value == durationTime.value) [_player.currentItem seekToTime:CMTimeMake(0, 1)];
         [_player play];
         [_playButton setImage:nil forState:UIControlStateNormal];
-        if (iOS7Later) [UIApplication sharedApplication].statusBarHidden = YES;
+//        if (iOS7Later) [UIApplication sharedApplication].statusBarHidden = YES;
         if (self.singleTapGestureBlock) {
             self.singleTapGestureBlock();
         }
